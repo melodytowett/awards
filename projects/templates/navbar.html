@@ -1,5 +1,5 @@
 {%load static %}
-{% load crispy_form_tags %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +12,9 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="{% url 'index' %}">Home</a>
+    </div>
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'post-project' %}">Home</a>
     </div>
   </div>
 </nav>

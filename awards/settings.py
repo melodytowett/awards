@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'projects.apps.ProjectsConfig',
     'bootstrap4',
     'cloudinary',
-    'crispy_forms'
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
