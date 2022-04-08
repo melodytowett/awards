@@ -8,13 +8,13 @@ class Projects(models.Model):
     title = models.CharField(max_length=100)
     image = CloudinaryField('image')
     description = models.CharField(max_length=300)
-    user = models.ForeignKey(User,on_delete=models.CASCADE,default=True)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='projects')
     link = models.URLField(max_length=200)
 
     def __str__(self):
         return self.title
 
-    def save_projects(self):
+    def save_project(self):
         self.save()
 
 
