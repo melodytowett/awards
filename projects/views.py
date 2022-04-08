@@ -7,8 +7,8 @@ from projects.forms import ProjectForm
 
 def index(request):
     projects = Projects.objects.all()
-    proj = {'projects':projects}
-    return render(request,'index.html',proj)
+    projs = {'projects':projects}
+    return render(request,'index.html',projs)
 
 def my_projects(request):
     current_user = request.user

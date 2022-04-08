@@ -1,10 +1,32 @@
-{%extends 'all-projects/base.html'%}
-{%block content%}
-<h1>Rate My Projects and award me</h1>
-{% for projects in project %}
-<h3 class="text-center"> {{project.title}} </h3>
-<img src=" {{project.image.url}} " alt="" srcset="">
-<p class="text-center"> {{project.description}} </p>
-<p class="text-center"> {{project.link}} </p>
-{% endfor %}
+{%extends 'all-projects/base.html'%} {%block content%} {%load static %}
+<style>
+.card{
+    display: inline-flex;
+    flex-direction: column-reverse;
+    border-color: aqua;
+}
+img{
+    width: 300px;
+    height: 300px;
+}
+</style>
+<div class="container">
+  <h4>Rate My Projects and award me</h4>
+  <div class="row" id="images" >
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+         {% for project in projects %}
+      <div class="card" style="width: 24rem; display: inline-block;">
+        <img src="{{project.image.url}} " class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">{{project.title}}</h5>
+          <p class="card-text">
+            {{project.description}}
+          </p>
+          <a href="#" class="btn btn-primary">{{project.link}}</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
 {%endblock%}

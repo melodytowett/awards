@@ -8,7 +8,7 @@ class Projects(models.Model):
     title = models.CharField(max_length=100)
     image = CloudinaryField('image')
     description = models.CharField(max_length=300)
-    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='projects')
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='project')
     link = models.URLField(max_length=200)
 
     def __str__(self):
@@ -17,11 +17,16 @@ class Projects(models.Model):
     def save_project(self):
         self.save()
 
+    @classmethod
+    def all_projects(cls,title):
+        project = cls.objects.filter(title__in=title)
+        return project
+
 
 class Profile(models.Model):
     profile_pic = CloudinaryField('image')
     user_bio = models.TextField(blank=True)
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='profile')
     contact = models.TextField(blank=True)
 
     def __str__(self):
@@ -29,3 +34,5 @@ class Profile(models.Model):
 
     def save_profile(self):
         self.save()
+    
+    
