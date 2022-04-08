@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 from decouple import config,Csv
 import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
@@ -39,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'projects.apps.ProjectsConfig',
     'bootstrap4',
-    'cloudinary'
+    'cloudinary',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -84,7 +88,12 @@ DATABASES = {
         'PASSWORD':"1234",
     }
 }
-
+cloudinary.config(
+    cloud_name=config('YOUR_CLOUD_NAME'),
+    api_key=config('YOUR_API_KEY'),
+    api_secret=config('YOUR_API_SECRET'),
+    secure=True
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
