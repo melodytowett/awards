@@ -1,12 +1,14 @@
 import re
 from django.shortcuts import redirect, render
-
+from.models import Projects,Profile
 from projects.forms import ProjectForm
 
 # Create your views here.
 
 def index(request):
-    return render(request,'index.html')
+    projects = Projects.objects.all()
+    proj = {'projects':projects}
+    return render(request,'index.html',proj)
 
 def my_projects(request):
     current_user = request.user
