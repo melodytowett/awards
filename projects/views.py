@@ -40,10 +40,11 @@ def update_profile(request):
     else:
         profile_form = ProfileForm()
     return render(request,'all-projects/profile.html',{"profile_form":profile_form})
+
 def search_project(request):
-    if 'project' in request.GET and request.GET["project"]:
-        search_title = request.GET.get("proect")
-        projects_found = Projects.search_by_title(search_title)
+    if  request. method == 'GET':
+        search_title = request.GET.get("project")
+        projects_found = Projects.search_by_title(search_title).all()
         return render(request,"all-projects/search.html",{"projects":projects_found})
     else:
         message = "Found no result"
