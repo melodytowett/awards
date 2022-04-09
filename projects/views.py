@@ -2,13 +2,15 @@ import re
 from django.shortcuts import redirect, render
 from.models import Projects,Profile
 from projects.forms import ProfileForm, ProjectForm
-
+import datetime as dt
 # Create your views here.
 
 def index(request):
+    date=dt.date.today()
     projects = Projects.objects.all()
     projs = {'projects':projects}
-    return render(request,'index.html',projs)
+    date = {"date":date}
+    return render(request,'index.html',date)
 
 def my_projects(request):
     current_user = request.user
