@@ -4,12 +4,13 @@ from django.shortcuts import redirect, render
 from.models import Projects,Profile
 from projects.forms import ProfileForm, ProjectForm
 import datetime as dt
+from django.urls import reverse
 # Create your views here.
 
-def date(request):
-    date=dt.date.today()
-    date = {"date":date}
-    return render(request,'index.html',date)
+# def date(request):
+#     date=dt.date.today()
+#     date = {"date":date}
+#     return render(request,'index.html',date)
 def index(request):
     projects = Projects.objects.all()
     projs = {'projects':projects}
@@ -28,7 +29,13 @@ def my_projects(request):
         post_form = ProjectForm()   
     return render(request,'all-projects/post-project.html',{"post_form":post_form})
 
+def profile(request):
+    profiles = Profile.objects.all()
+    prof = {"profiles":profiles}
+    return render(request,'all-projects/my-prof.html',prof)
+
 def update_profile(request):
+ 
     current_user = request.user
     if request.method == 'POST':
         profile_form = ProfileForm(request.POST,request.FILES)
@@ -36,7 +43,7 @@ def update_profile(request):
             profile  = profile_form.save(commit=False)
             profile.user = current_user
             profile.save()
-            return redirect('update_profile')
+            return redirect('profile')
     else:
         profile_form = ProfileForm()
     return render(request,'all-projects/profile.html',{"profile_form":profile_form})

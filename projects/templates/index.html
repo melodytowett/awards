@@ -118,7 +118,8 @@ opacity: 0.6;
           <a href="#" class="btn ">{{project.link}}   {{date|date:"l d-F Y"}}</a>
         </div>
         <div class="card-footer">
-          <p>BY <b> {{project.user}} </b> </p>
+          <p>BY <b> {{project.user}} </b> 
+            <img src=" {{profile.profile_pic}} " class="rounded-circle" style="width: 40px; height: 40px; border-style: solid;" alt="" srcset=""></p>
         </div>
       </div>
       {% endfor %}

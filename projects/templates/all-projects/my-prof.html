@@ -1,0 +1,22 @@
+  
+{%extends 'all-projects/base.html'%} {%block content%} {{block.super}}
+{% load bootstrap4 %}
+{%load static %}
+  <div class="row">
+             {% for profile in profiles %}
+      <div class="card" style="width: 24rem;">
+        <img src="{{profile.profile_pic.url}} " class="card-img-top" alt="..." />
+        <div class="card-body">
+          <b class="card-title">{{profile.user}}</b>
+          <p class="card-text">
+            {{profile.user_bio}}
+          </p>
+          <a href="#" class="btn ">{{profile.contact}}   {{date|date:"l d-F Y"}}</a>
+        </div>
+        <div class="card-footer">
+          <p>BY <b> {{profile.user}} </b> </p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {%endblock%}
