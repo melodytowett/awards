@@ -1,12 +1,24 @@
+from email import message
 import re
 from django.db import DataError
 from django.shortcuts import redirect, render
 from.models import Projects,Profile
-from projects.forms import ProfileForm, ProjectForm
+from projects.forms import NewUserForm, ProfileForm, ProjectForm
 import datetime as dt
 from django.urls import reverse
+from django.contrib import messages
 # Create your views here.
 
+
+def register_user(request):
+    if request.method == 'POST':
+        form = NewUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            return redirect('index')
+        messages.error(request,"registration Failed invalid credentials")
+    form = NewUserForm()
+    return render(request=request,template_name='registration/register.html',context={"register_form":form})
 # def date(request):
 #     date=dt.date.today()
 #     date = {"date":date}
