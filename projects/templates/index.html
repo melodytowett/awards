@@ -4,14 +4,16 @@
     display: inline-flex;
     flex-direction: column;
     font-size: x-small;
-
 }
 img{
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
+    transition: transform 0.2s;
 }
 img:hover{
-opacity: 0.6;
+-ms-transform: scale(1.2);
+-webkit-transform: scale(1.2);
+transform: scale(1.2);
 }
 .bg{
   background-image: url('{%static "image/og.jpg"%}');
@@ -105,17 +107,17 @@ opacity: 0.6;
   <div class="site">
  <p><b>Sites of the day</b> Previous Winners</p>
 </div>
-  <div class="row" id="images" >
+  <div class="row" >
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
          {% for project in projects %}
-      <div class="card" style="width: 24rem;">
+      <div class="card" style="width: 18rem;">
         <img src="{{project.image.url}} " class="card-img-top" alt="..." />
         <div class="card-body">
           <b class="card-title">{{project.title}}</b>
           <p class="card-text">
             {{project.description}}
           </p>
-          <a href="#" class="btn ">{{project.link}}   {{date|date:"l d-F Y"}}</a>
+          <a href="#">{{project.link}}   {{date|date:"l d-F Y"}}</a>
         </div>
         <div class="card-footer">
           <p>BY <b> {{project.user}} </b> 
