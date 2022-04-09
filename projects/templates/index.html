@@ -1,131 +1,172 @@
 {%extends 'all-projects/base.html'%} {%block content%} {%load static %}
 <style>
-.card{
-    display: inline-flex;
-    flex-direction: column;
+  .card {
+    display: flex;
     font-size: x-small;
-}
-img{
+    margin-right: 30px;
+    margin-bottom: 20px;
+  }
+  .row {
+    margin-top: -50px;
+  }
+  img {
     width: 200px;
     height: 200px;
     transition: transform 0.2s;
-}
-img:hover{
--ms-transform: scale(1.2);
--webkit-transform: scale(1.2);
-transform: scale(1.2);
-}
-.bg{
-  background-image: url('{%static "image/og.jpg"%}');
-  background-repeat: no-repeat;
-  background-size: 100%;
-  height: 400px;
- 
-}
-.bg:hover{
-  opacity: 0.6;
-}
-.hfour{
-  height: 50px;
-  text-align: center;
-  font-size: larger;
-  font-weight: bolder;
-}
-.bg{
-  color:black;
-  padding: 30px;
-}
-.site{
-  height: 150px;
-  padding-top: 50px;
-}
-.title{
-  text-align: center;
-}
-.rates,.Srates,.trates,.frates{
-  border-radius: 50px;
-  border: 3px solid rgb(247, 20, 20);
-  width: 50px;
-  color: white;
-  text-align: center;
-  font-size: xx-small;
-  font-weight: bold;
-  display: inline-flex;
-  margin-left: 250px;
-  
-}
-.Srates{
-  border-color: coral;
-  margin-left: 30px;
-}
-.trates{
-  border-color: rgb(42, 115, 211);
-  margin-left: 30px;
-}
-.frates{
-  border-color: rgb(23, 158, 211);
-  margin-left: 30px;
-}
-.last{
-  border-radius: 50px;
-  color: white;
-  margin-top: 130px;
-  margin-left: 30px;
-}
+  }
+  img:hover {
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+  }
+  .bg {
+    background-image: url('{%static "image/og.jpg"%}');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 400px;
+  }
+  .bg:hover {
+    opacity: 0.6;
+  }
+  .hfour {
+    height: 50px;
+    text-align: center;
+    font-size: larger;
+    font-weight: bolder;
+  }
+  .bg {
+    color: black;
+    padding: 30px;
+  }
+  .site {
+    height: 150px;
+    padding-top: 20px;
+  }
+  .title {
+    text-align: center;
+  }
+  .rates,
+  .Srates,
+  .trates,
+  .frates {
+    border-radius: 50px;
+    border: 3px solid rgb(247, 20, 20);
+    width: 50px;
+    color: white;
+    text-align: center;
+    font-size: xx-small;
+    font-weight: bold;
+    display: inline-flex;
+    margin-left: 250px;
+  }
+  .Srates {
+    border-color: coral;
+    margin-left: 30px;
+  }
+  .trates {
+    border-color: rgb(42, 115, 211);
+    margin-left: 30px;
+  }
+  .frates {
+    border-color: rgb(23, 158, 211);
+    margin-left: 30px;
+  }
+  .last {
+    border-radius: 50px;
+    color: white;
+    margin-top: 130px;
+    margin-left: 30px;
+  }
 </style>
 
 <div class="header">
   <h2 class="hfour">Awwwards.</h2>
+  {%if projects %}
+  <h4>{{projects.user}}</h4>
+  {%endif%}
 </div>
 <div class="bg">
-  <p><b>site of the day</b> {{date|date:"l d-F Y"}}
-  <i class="fa fa-share-alt" style="font-size:30px;color:black; margin-left: 600px;"></i>
+  <p>
+    <b>site of the day</b> {{date|date:"l d-F Y"}}
+    <i
+      class="fa fa-share-alt"
+      style="font-size: 30px; color: black; margin-left: 600px"
+    ></i>
   </p>
   <div class="title">
-  <h3>Organic</h3>
-  <h6>BY MELODY FROM KENYA WITH 7.1</h6>
+    <h3>Organic</h3>
+    <h6>BY MELODY FROM KENYA WITH 7.1</h6>
   </div>
   <div class="rates">
-    <p>7.20 <br> DESIGN</p>
+    <p>
+      7.20 <br />
+      DESIGN
+    </p>
   </div>
   <div class="Srates">
-    <p>5.9 <br>USABILITY </p>
+    <p>5.9 <br />USABILITY</p>
   </div>
   <div class="trates">
-    <p>7.9 <br>CREATIVITY </p>
+    <p>7.9 <br />CREATIVITY</p>
   </div>
   <div class="frates">
-    <p>8.3 <br>CONTENT </p>
+    <p>8.3 <br />CONTENT</p>
   </div>
-<div class="last">
-<button class="btn btn-primary btn-sm" style="border-radius: 50px;">Visit Site</button>
-<button class="btn text-white btn-sm" style="border-style: 1px;border-color: white; border-radius: 50px;"> Collect</button>
-</div>
+  <div class="last">
+    <button class="btn btn-primary btn-sm" style="border-radius: 50px">
+      Visit Site
+    </button>
+    <button
+      class="btn text-white btn-sm"
+      style="border-style: 1px; border-color: white; border-radius: 50px"
+    >
+      Collect
+    </button>
+  </div>
 </div>
 
 <div class="container">
   <div class="site">
- <p><b>Sites of the day</b> Previous Winners</p>
-</div>
-  <div class="row" >
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-         {% for project in projects %}
-      <div class="card" style="width: 18rem;">
-        <img src="{{project.image.url}} " class="card-img-top" alt="..." />
-        <div class="card-body">
-          <b class="card-title">{{project.title}}</b>
-          <p class="card-text">
-            {{project.description}}
-          </p>
-          <a href="#">{{project.link}}   {{date|date:"l d-F Y"}}</a>
-        </div>
-        <div class="card-footer">
-          <p>BY <b> {{project.user}} </b> 
-            <img src=" {{profile.profile_pic}} " class="rounded-circle" style="width: 40px; height: 40px; border-style: solid;" alt="" srcset=""></p>
+    <p><b>Sites of the day</b> Previous Winners</p>
+  </div>
+  <div class="row">
+    {% for project in projects %}
+    <div class="card" style="width: 18rem">
+      <img src="{{project.image.url}} " class="card-img-top" alt="..." />
+      <div class="card-body">
+        <b class="card-title">{{project.title}}</b>
+        <p class="card-text">{{project.description}}</p>
+        <a href="#">{{project.link}} {{date|date:"l d-F Y"}}</a>
+      </div>
+      <div class="card-footer">
+        <p>
+          <img
+            src=" {{profile.profile_pic}} "
+            class="rounded-circle"
+            style="width: 30px; height: 30px; border-style: solid"
+            alt=""
+            srcset=""
+          />
+          BY <b> {{project.user}} </b>
+        </p>
+        <div class="form-group">
+          <label for="sel1">Rate My Project</label>
+          <select class="form-control" id="sel1">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+          </select>
         </div>
       </div>
-      {% endfor %}
     </div>
+    {% endfor %}
   </div>
 </div>
 {%endblock%}

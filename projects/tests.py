@@ -18,7 +18,6 @@ class ProjectsTestClass(TestCase):
         projects = Projects.objects.all()
         self.assertTrue(len(projects)>0)
        
-  
     def get_projects(self):
         my_projects = Projects.all_projects() 
         self.assertTrue(len(my_projects)>0)
