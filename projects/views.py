@@ -1,18 +1,21 @@
 import re
+from django.db import DataError
 from django.shortcuts import redirect, render
 from.models import Projects,Profile
 from projects.forms import ProfileForm, ProjectForm
 import datetime as dt
 # Create your views here.
 
-def index(request):
+def date(request):
     date=dt.date.today()
-    projects = Projects.objects.all()
-    projs = {'projects':projects}
     date = {"date":date}
     return render(request,'index.html',date)
+def index(request):
+    projects = Projects.objects.all()
+    projs = {'projects':projects}
+    return render(request,'index.html',projs)
 
-def my_projects(request):
+def my_projects(request):  
     current_user = request.user
     if request.method == 'POST':
         post_form = ProjectForm(request.POST,request.FILES)
@@ -22,7 +25,7 @@ def my_projects(request):
             post.save()
             return redirect('index')
     else:
-        post_form = ProjectForm()
+        post_form = ProjectForm()   
     return render(request,'all-projects/post-project.html',{"post_form":post_form})
 
 def update_profile(request):
@@ -37,3 +40,11 @@ def update_profile(request):
     else:
         profile_form = ProfileForm()
     return render(request,'all-projects/profile.html',{"profile_form":profile_form})
+def search_project(request):
+    if 'project' in request.GET and request.GET["project"]:
+        search_title = request.GET.get("proect")
+        projects_found = Projects.search_by_title(search_title)
+        return render(request,"all-projects/search.html",{"projects":projects_found})
+    else:
+        message = "Found no result"
+        return render(request,"all-projects/search.html",{"message":message})

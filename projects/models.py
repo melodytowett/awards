@@ -1,4 +1,5 @@
 
+from turtle import title
 from django.db import models
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
@@ -22,6 +23,10 @@ class Projects(models.Model):
         project = cls.objects.filter(title__in=title)
         return project
 
+    @classmethod
+    def search_by_title(cls,search_title):
+        projects = cls.objects.filter(title__icontains=search_title)
+        return projects
 
 class Profile(models.Model):
     profile_pic = CloudinaryField('image')
