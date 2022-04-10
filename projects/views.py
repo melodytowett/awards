@@ -1,3 +1,4 @@
+import re
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from.models import Projects,Profile, Rating
@@ -10,7 +11,11 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import status
 from .serializer import ProfileSerializer,ProjectsSerializer
+from projects import serializer
+from .permission import IsAdminOrReadOnly
+from projects import permission
 # Create your views here.
 
 
@@ -156,13 +161,21 @@ def logout_user(request):
 
 class ProjList(APIView):
     def get(self,request,format=None):
+        permission_classes = (IsAdminOrReadOnly)
         all_projs = Projects.objects.all()
         serializers = ProjectsSerializer(all_projs,many=True)
         return Response(serializers.data)
 
+    def post(self,request,format=None):
+        serializers = ProjectsSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data,status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
 class ProfList(APIView):
     def get(self,request,format=None):
+        permission_classes = (IsAdminOrReadOnly)
         all_profs = Profile.objects.all()
         serializers = ProfileSerializer(all_profs,many=True)
         return Response(serializers.data)
-        
