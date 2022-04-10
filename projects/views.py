@@ -8,6 +8,9 @@ from django.urls import reverse
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import ProfileSerializer,ProjectsSerializer
 # Create your views here.
 
 
@@ -150,3 +153,16 @@ def logout_user(request):
     logout(request)
     messages.info(request,"Logged out successfully")
     return redirect('index')
+
+class ProjList(APIView):
+    def get(self,request,format=None):
+        all_projs = Projects.objects.all()
+        serializers = ProjectsSerializer(all_projs,many=True)
+        return Response(serializers.data)
+
+class ProfList(APIView):
+    def get(self,request,format=None):
+        all_profs = Profile.objects.all()
+        serializers = ProfileSerializer(all_profs,many=True)
+        return Response(serializers.data)
+        

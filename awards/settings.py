@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'crispy_forms',
     'phonenumber_field',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
