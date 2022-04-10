@@ -23,20 +23,28 @@
           </div>
         </form>
     <div class="navbar-header">
-      <a class="navbar-brand" href="{% url 'update_profile' %}">Profile</a>
-    </div>
-    <div class="navbar-header">
       <a class="navbar-brand" style="font-size: small;" href="{% url 'post-project' %}">SUBMIT YOUR SITE!</a>
     </div>
-          <li class="nav-item">
-        <a class="nav-link" href="/logout">Logout</a>
-      </li>
+  <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Account
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="{%url 'update_profile'%}">Add profile</a>
+    <a class="dropdown-item" href="/api">API</a>
+    <a class="dropdown-item" href="/prof">View Profiles</a>
+    <a class="dropdown-item" href="/logout">Logout</a>
+    
+  </div>
+</div>
+
 
     {%else%}
      <li class="nav-item">
         <a class="nav-link" href="/register">Signup</a>
       </li> 
       {%endif%}
+  
   </div>
 </nav>
 </body>
