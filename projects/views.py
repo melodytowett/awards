@@ -55,6 +55,8 @@ def login_user(request):
 @login_required(login_url='login/')
 def index(request):
     projects = Projects.objects.all()
+    profiles = Profile.objects.all()
+    profs = {"profiles":profiles}
     projs = {'projects':projects}
     return render(request,'index.html',projs)
 

@@ -141,6 +141,7 @@
         <a href="#">{{project.link}} {{date|date:"l d-F Y"}}</a>
       </div>
       <div class="card-footer">
+ 
         <p>
           <img
             src=" {{profile.profile_pic}} "
@@ -150,8 +151,9 @@
             srcset=""
           />
           BY <b> {{project.user}} </b>
-          <a href="{% url 'rate_project'%}">Rate</a>
+          <a style="margin-left: 100px;" href="{% url 'rate_project'%}">Rate</a>
         </p>
+      
       </div>
 
     </div>
