@@ -1,5 +1,3 @@
-
-from turtle import title
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from.models import Projects,Profile, Rating
