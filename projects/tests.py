@@ -24,9 +24,7 @@ class ProjectsTestClass(TestCase):
 
     def tearDown(self):
         Projects.objects.all().delete()
-
- 
-
+        
 class ProfileTestClass(TestCase):
     def setUp(self):
         self.profile = Profile(user_bio="things about me",contact="028293892",profile_pic="image.png")

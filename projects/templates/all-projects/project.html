@@ -1,40 +1,53 @@
 {%extends 'all-projects/base.html'%} {%block content%} {%load static %}
 {%load bootstrap4%}
 {%load crispy_forms_tags %}
-
-
 <div class="container">
-
-   <div class="row">
-     <img src="{{projects.project_image.url}}"  class="img-responsive" alt="">
-   </div>
-
-   <div class="row">
-     <h1 class="text-center">{{projects.title}}</h1>
-   </div>
-
-   <div class="row">
-     <p>{{projects.description}}</p>
-   </div>
-
-   <div class="row">
-     <p>Posted {{article.pub_date|timesince}} by {{article.editor.first_name}}</p>
-   </div>
-
- </div>
-<div class="container mt-3">
-    <p class="md-4 mt-4"> {{project.title|title}} by {{project.user.username|title}} </p>
-
-          <div class="row mt-5">
+            <div class="row mt-5">
                 <div class="col-md-2"></div>
                 <div class="col-md-8 mt-4">
+                    <!-- <h3 class="">Rating Scores</h3> -->
+                   
+                    {% for rating in post.ratings.all %}
+                    {% if forloop.counter is post.ratings.all.count %}
+                    <a class="btn btn-color btn-sm" ><h5>{{ rating.score }}</h5>
+                        <span class="">Average Score</span>
+                    </a>
+                    <a class="btn btn-outline-success btn-sm" ><h5>{{ rating.design_average }}</h5>
+                        <span class="">Design Average</span>
+                    </a>
+                    <a class="btn btn-outline-primary btn-sm" ><h5>{{ rating.usability_average }}</h5>
+                        <span class="">Usability Average</span>
+                    </a>
+                    <a class="btn btn-outline-danger btn-sm" ><h5>{{ rating.content_average }}</h5>
+                        <span class="">Content Average</span>
+                    </a>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+            {%if current_user.username != post.user.username%}
+            {% if rating_status %}
+            <h6 class="alert alert-info mt-2 text-center">You have already voted</h6>
+            {% else %}
             {% if user.is_authenticated %}
-            <h5 class="mt-5 p-2 btn-color text-center">Rate Project</h5>
+           <div class="card-body text-center">
+            <h5 class="text-center card-header">Rate Project</h5>
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{rating_form|crispy}}
                 <button class="btn btn-sm btn-color">Rate</button>
             </form>
+            </div>
             {% endif %}
+     </div>
+   </div>
+            {% endif %}
+            {% endif %}
+        </div>
+
+    </div>
 </div>
+
+ </div>
 {%endblock%}

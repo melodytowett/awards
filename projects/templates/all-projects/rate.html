@@ -1,0 +1,4 @@
+ <form  action="{%url 'update_profile'%}" method="post" enctype="multipart/form-data">
+                      {% csrf_token %} {{ profile_form|crispy }}
+                   <input type="submit" class="btn btn-success btn-sm" value="Post">
+ </form>
