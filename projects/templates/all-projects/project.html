@@ -3,12 +3,15 @@
 {%load crispy_forms_tags %}
 <div class="container">
             <div class="row mt-5">
+                {%for project in projects%}
+                <p>project.description</p>
+                {%endfor%}
                 <div class="col-md-2"></div>
                 <div class="col-md-8 mt-4">
                     <!-- <h3 class="">Rating Scores</h3> -->
                    
-                    {% for rating in post.ratings.all %}
-                    {% if forloop.counter is post.ratings.all.count %}
+                    {% for rating in project.ratings.all %}
+                    {% if forloop.counter is project.ratings.all.count %}
                     <a class="btn btn-color btn-sm" ><h5>{{ rating.score }}</h5>
                         <span class="">Average Score</span>
                     </a>
@@ -21,12 +24,15 @@
                     <a class="btn btn-outline-danger btn-sm" ><h5>{{ rating.content_average }}</h5>
                         <span class="">Content Average</span>
                     </a>
+                      <a class="btn btn-outline-danger btn-sm" ><h5>{{ rating.creativity_average }}</h5>
+                        <span class="">creativity_average Average</span>
+                    </a>
                     {% endif %}
                     {% endfor %}
                 </div>
                 <div class="col-md-2"></div>
             </div>
-            {%if current_user.username != post.user.username%}
+            {%if current_user.username != project.user.username%}
             {% if rating_status %}
             <h6 class="alert alert-info mt-2 text-center">You have already voted</h6>
             {% else %}
